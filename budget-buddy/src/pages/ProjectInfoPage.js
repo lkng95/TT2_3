@@ -3,25 +3,44 @@ import "../css/Project.css";
 import { useTable } from "react-table";
 import axios from "axios";
 
-function ProjectInfoPage({ id, uid, name, budget, description }) {
-  const GET_API_PROJ = "http://localhost:3001/manage/projects/all";
-  const GET_API_EXPENSES = "http://localhost:3001/manage/1/view-expenses";
+function ProjectInfoPage({ id }) {
+  const GET_API_PROJ = "http://localhost:3001/manage/projects/";
+  const GET_API_EXPENSES = "http://localhost:3001/manage/";
 
-  const [post, setPost] = React.useState(null);
+  const [project, setProject] = React.useState(null);
+  const [expenses, setExpenses] = React.useState(null);
+
+  var projectName = "SWT";
+  var projectID = "2";
+  var userID = "1";
+  var projectDesc = "Smart Watch Tracker";
+  var budget = "80000";
+
+  React.useEffect(() => {
+    axios.get(`${GET_API_PROJ}/2`).then((response) => {
+      setProject(response.data.project);
+    });
+    axios.get(`${GET_API_EXPENSES}/2/view-expenses`).then((response) => {
+      setExpenses(response.data.expenses);
+    });
+  }, []);
 
   const data = React.useMemo(
     () => [
       {
-        col1: "Expense #1",
-        col2: "$50",
+        name: "Consultant",
+        desc: "Consultancy services for integration work",
+        amount: "10000",
       },
       {
-        col1: "Expense #2",
-        col2: "$25",
+        name: "Consultant",
+        desc: "Consultancy services for integration work",
+        amount: "10000",
       },
       {
-        col1: "Expense #3",
-        col2: "$10",
+        name: "Consultant",
+        desc: "Consultancy services for integration work",
+        amount: "10000",
       },
     ],
     []
@@ -30,12 +49,16 @@ function ProjectInfoPage({ id, uid, name, budget, description }) {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Expense",
-        accessor: "col1",
+        Header: "Name",
+        accessor: "name",
       },
       {
-        Header: "Cost",
-        accessor: "col2",
+        Header: "Description",
+        accessor: "desc",
+      },
+      {
+        Header: "Amount",
+        accessor: "amount",
       },
       {
         Header: "Action",
@@ -53,12 +76,12 @@ function ProjectInfoPage({ id, uid, name, budget, description }) {
   } = useTable({ columns, data });
 
   return (
-    <div className="container">
+    <div className="project">
       {/* Project ID, Name, Description, Budget */}
       <div className="project__info">
-        <p>Project #{id}</p>
-        <p>Name: {name}</p>
-        <p>Description: {description}</p>
+        <p>Project #{projectID}</p>
+        <p>Name: {projectName}</p>
+        <p>Description: {projectDesc}</p>
         <p className="project__budget">Project Budget: ${budget}</p>
         <p>Total Expenses used so far: </p>
         <p>Remaining: </p>
