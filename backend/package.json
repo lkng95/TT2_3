@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon backend/index.js"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,7 @@
     "mongod": "^2.0.0",
     "mongodb": "^4.1.4",
     "mongoose": "^6.0.12",
-    "pine": "^1.1.1",
-    "react-table": "^7.7.0"
+    "pine": "^1.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

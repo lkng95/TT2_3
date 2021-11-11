@@ -23,8 +23,8 @@ function AppProject() {
       <div className="header">
         <h1>Add new project:</h1>
         <div>
-          <Button color="green" text="Add" />
-          <Button color="red" text="Back" />
+          <Button color="green" text="Add" onClick={addNewProject} />
+          <Button color="red" text="Back" onClick={goBack} />
         </div>
       </div>
       <form className="add-form">

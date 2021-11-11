@@ -1,5 +1,5 @@
-const Project = require("../model/projectModel");
-const Expense = require("../model/expenseModel");
+const project = require("../model/projectModel");
+const expense = require("../model/expenseModel");
 const { errorFormatter } = require("../utils/errorFormatter");
 const { OK } = require("http-status");
 const apiLogger = require("../logger/api.logger");
@@ -10,7 +10,7 @@ const getExpenseController = async (req, res, next) => {
 
   let projectExpenses;
   try {
-    projectExpenses = await Project.find({ project_id: projectId });
+    projectExpenses = await expense.find({ project_id: projectId });
   } catch (error) {
     return next(error);
   }
@@ -23,8 +23,27 @@ const getExpenseController = async (req, res, next) => {
 };
 
 const addExpenseController = async (req, res, next) => {
-  
-}
+  const projectId = req.params.projectId;
+  const body = req.body;
+  const user = req.body.created_by; // body assumed to have created_by field
+
+  let addedExpense;
+  try {
+    const newExpense = new expense({
+      ...body,
+      project_id: projectId,
+      updated_by: user,
+    });
+    addedExpense = await newExpense.save().toObject();
+  } catch (error) {
+    return next(error);
+  }
+
+  return res.status(OK).json({
+    message: "Expense successfully added",
+    expense: addedExpense,
+  });
+};
 
 async function updateExpenseController(
   projectId,
@@ -37,18 +56,19 @@ async function updateExpenseController(
 ) {
   apiLogger.info(`expense controller::: update expenses ${projectId}`);
 
-  await Expense.updateOne({ project_id: projectId }, { $set: { test: test } });
+  await expense.updateOne({ project_id: projectId }, { $set: { test: test } });
 }
 
-async function deleteExpenseController(projectId) {
-  apiLogger.info(`expense controller::: delete expenses ${projectId}`);
+async function deleteExpenseController(expenseId) {
+  apiLogger.info(`expense controller::: delete expenses ${expenseId}`);
 
-  await Expense.deleteOne({ project_id: projectId });
+  await expense.deleteOne({ id: expenseId });
 }
 
 module.exports = {
   getExpenseController,
+  addExpenseController,
   updateExpenseController,
   deleteExpenseController,
-  addExpenseController
+  addExpenseController,
 };

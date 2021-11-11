@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -6,6 +7,8 @@ import AddExpense from "./components/AddExpense";
 import AddProject from "./components/AddProject";
 
 function App() {
+  
+
   return (
     <BrowserRouter>
       <Routes>

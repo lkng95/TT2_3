@@ -9,3 +9,4 @@ router.use("/", expenseRouter);
 router.use("/projects", projectRouter);
 
 module.exports = router;
+

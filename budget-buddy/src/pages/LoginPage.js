@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import firebase from "../firebase.js";
 
 function LoginPage() {
   const auth = firebase.auth();
+
+  let navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +19,7 @@ function LoginPage() {
       setUser(user.uid);
       console.log(user.uid);
       console.log("Successful login");
+      navigate("/projects");
     } catch (err) {
       console.log(err);
       alert(err.message);
@@ -72,8 +76,8 @@ function LoginPage() {
           </div>
         </form>
         <Button color="green" text="Login" onClick={login} />
-        <Button color="darkorange" text="Check User" onClick={checkUser} />
-        <Button color="red" text="Logout" onClick={logout} />
+        {/* <Button color="darkorange" text="Check User" onClick={checkUser} /> */}
+        {/* <Button color="red" text="Logout" onClick={logout} /> */}
       </div>
     </div>
   );
