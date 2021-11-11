@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const projectRouter = require("./api/route/projectRoute");
-app.use("/manage", projectRouter);
+const routes = require("./api/route/index");
+app.use("/manage", routes);
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);

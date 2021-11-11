@@ -4,7 +4,7 @@ const {
   getExpenseController,
   addExpenseController,
   updateExpenseController
-} = require("../controllers/expenseController");
+} = require("../controller/expenseController");
 
 const router = express.Router();
 
