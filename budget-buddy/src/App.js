@@ -1,12 +1,14 @@
-import './App.css';
-import ProjectsPage from './components/ProjectsPage';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <ProjectsPage />
-      {/* <Project /> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
