@@ -1,12 +1,17 @@
 import React from "react";
 import "../css/Project.css";
 import { useTable } from "react-table";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 import axios from "axios";
 
 function ProjectInfoPage({ id }) {
   const GET_API_PROJ = "http://localhost:3001/manage/projects/";
   const GET_API_EXPENSES = "http://localhost:3001/manage/";
 
+  let navigate = useNavigate();
+
+  const [post, setPost] = React.useState(null);
   const [project, setProject] = React.useState(null);
   const [expenses, setExpenses] = React.useState(null);
 
@@ -70,8 +75,27 @@ function ProjectInfoPage({ id }) {
     prepareRow,
   } = useTable({ columns, data });
 
+  const goBack = () => {
+    navigate("/projects");
+  };
+
+  const addNewExpense = () => {
+    navigate("/add_expense");
+  };
+
   return (
-    <div className="project">
+    <div className="container">
+      <div className="header">
+        <h1>Project #{id}</h1>
+        <div>
+          <Button color="red" text="Back" onClick={goBack} />
+          <Button
+            color="green"
+            text="Add new expense"
+            onClick={addNewExpense}
+          />
+        </div>
+      </div>
       {/* Project ID, Name, Description, Budget */}
       <div className="project__info">
         <p>Project #{projectID}</p>
@@ -134,18 +158,6 @@ function ProjectInfoPage({ id }) {
           </tbody>
         </table>
       </div>
-
-      {/* Add expenses */}
-      <div>
-        <h4>Add Expense</h4>
-        <p>Name</p>
-        <input type="text" />
-        <p>Cost</p>
-        <input type="text" />
-      </div>
-      <button className="expense__add" type="submit">
-        Add
-      </button>
     </div>
   );
 }
