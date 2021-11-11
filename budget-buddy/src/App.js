@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/expense" element={<ViewExpenses />} />
         <Route exact path="/add_project" element={<AddProject />} />
         <Route exact path="/add_expense" element={<AddExpense />} />
-        <Route path="/projects" element={<ProjectsPage />} />
+        <Route exact path="/projects" element={<ProjectsPage />} />
       </Routes>
     </BrowserRouter>
   );

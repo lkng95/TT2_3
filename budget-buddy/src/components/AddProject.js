@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 function AppProject() {
@@ -6,11 +7,25 @@ function AppProject() {
   const [newProjectDesc, setNewProjectDesc] = useState("");
   const [newBudget, setNewBudget] = useState("");
 
+  let navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/projects");
+  };
+
+  const addNewProject = () => {
+    console.log("Added new project");
+    navigate("/projects");
+  };
+
   return (
     <div className="container">
       <div className="header">
         <h1>Add new project:</h1>
-        <Button color="green" text="Add" />
+        <div>
+          <Button color="green" text="Add" />
+          <Button color="red" text="Back" />
+        </div>
       </div>
       <form className="add-form">
         <div className="form-control">
