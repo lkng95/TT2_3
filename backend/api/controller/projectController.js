@@ -1,4 +1,4 @@
-const { connect } = require('http2')
+const { connect } = require('../config/dbconfig')
 const apiLogger = require('../logger/api.logger')
 const { Project } = require('../model/projectModel')
 
@@ -11,12 +11,12 @@ class projectControler {
     async getAllProjects() {
         apiLogger.info(`project controller: getAllProjects`)
     
-        try{
             const projects = await Project.find();
+            console.log(projects)
+
             return projects
-        } catch(err) {
-            apiLogg
-        }
+        
+        
     }
     
 
