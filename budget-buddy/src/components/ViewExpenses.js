@@ -24,11 +24,24 @@ function ViewExpenses({ expenseData }) {
     setAllowEditing(!allowEditing);
   };
 
+  const confirmChanges = () => {
+    console.log("Changes confirmed");
+    setAllowEditing(false);
+  };
+
   return (
     <div className="container">
       <div className="header">
         <h1>Expense #{expenseID}</h1>
-        <Button color="green" text="Edit" onClick={toggleEditMode} />
+        <div>
+          <Button color="green" text="Edit" onClick={toggleEditMode} />
+          <Button
+            color="green"
+            text="Confirm"
+            onClick={confirmChanges}
+            disabled={!allowEditing}
+          />
+        </div>
       </div>
 
       <form className="add-form">
@@ -60,6 +73,42 @@ function ViewExpenses({ expenseData }) {
             value={"$" + amt}
             onChange={(e) => setAmt(e.target.value)}
             disabled={!allowEditing}
+          />
+        </div>
+        <div className="form-control">
+          <label>Created by:</label>
+          <input
+            type="text"
+            placeholder="Input description"
+            value={testData.created_by}
+            disabled={true}
+          />
+        </div>
+        <div className="form-control">
+          <label>Created at:</label>
+          <input
+            type="text"
+            placeholder="Input description"
+            value={testData.created_at}
+            disabled={true}
+          />
+        </div>
+        <div className="form-control">
+          <label>Last updated by:</label>
+          <input
+            type="text"
+            placeholder="Input description"
+            value={testData.updated_by}
+            disabled={true}
+          />
+        </div>
+        <div className="form-control">
+          <label>Last updated at:</label>
+          <input
+            type="text"
+            placeholder="Input description"
+            value={testData.updated_at}
+            disabled={true}
           />
         </div>
       </form>
