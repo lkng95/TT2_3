@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get("/projects", async(req, res) => {
     console.log(`get projects`);
-    atmController.getAccounts().then(data => res.json(data));
+    projectControler.getAccounts().then(data => res.json(data));
     
 });

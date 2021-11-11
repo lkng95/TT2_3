@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 const projectRouter = require('./api/route/projectRoute')
-app.use('/projects', projectRouter)
+app.use('/manage', projectRouter)
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}` )
