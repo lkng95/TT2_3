@@ -16,6 +16,10 @@ const projectSchema = mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+  id: {
+    type: Number,
+    require: true
   }
 });
 
