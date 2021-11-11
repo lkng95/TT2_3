@@ -42,11 +42,6 @@ function ProjectInfoPage({ id }) {
         desc: "Consultancy services for integration work",
         amount: "10000",
       },
-      {
-        name: "Consultant",
-        desc: "Consultancy services for integration work",
-        amount: "10000",
-      },
     ],
     []
   );
