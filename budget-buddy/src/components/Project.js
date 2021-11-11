@@ -3,6 +3,8 @@ import "./Project.css";
 import { useTable } from "react-table";
 
 function Project({ id, uid, name, budget, description }) {
+  const [post, setPost] = React.useState(null);
+
   const data = React.useMemo(
     () => [
       {
