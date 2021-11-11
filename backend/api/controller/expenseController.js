@@ -45,19 +45,26 @@ const addExpenseController = async (req, res, next) => {
   });
 };
 
-async function updateExpenseController(
-  projectId,
-  category_id,
-  name,
-  description,
-  amount,
-  updated_by,
-  updated_at
-) {
-  apiLogger.info(`expense controller::: update expenses ${projectId}`);
+const updateExpenseController = async (req, res, next) => {
+  const { id, name, description, amount } = req.body;
 
-  await expense.updateOne({ project_id: projectId }, { $set: { test: test } });
-}
+  let updates = {};
+  if (name) updates.name = name;
+  if (description) updates.description = description;
+  if (amount) updates.amount = amount;
+
+  let updatedExpense;
+  try {
+    updatedExpense = await expense.updateOne({ id: id }, updates);
+  } catch (error) {
+    return next(error);
+  }
+
+  return res.status(OK).json({
+    message: "Expense successfully updated",
+    updatedExpense: updatedExpense,
+  });
+};
 
 async function deleteExpenseController(expenseId) {
   apiLogger.info(`expense controller::: delete expenses ${expenseId}`);
