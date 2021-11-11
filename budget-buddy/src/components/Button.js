@@ -17,6 +17,7 @@ function Button({ color, text, onClick, disabled }) {
 Button.defaultProps = {
   color: "black",
   text: "Button",
+  disabled: false,
 };
 
 Button.propTypes = {
