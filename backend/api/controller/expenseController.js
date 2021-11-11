@@ -1,9 +1,15 @@
-<<<<<<< HEAD
 const apiLogger = require('../logger/api.logger')
 const { expense } = require('../model/expenseModel')
 const { connect, disconnect } = require('../config/dbconfig');
 
+const getExpenseController = async (req, res, next) => {
+  const projectId = req.params.projectId;
 
+  let projectExpenses;
+  try {
+    // projectExpenses = await
+  } catch (error) {}
+};
 
 async function updateExpenseController(projectId, category_id, name, description, amount, updated_by, updated_at) {
     apiLogger.info(`expense controller::: update expenses ${projectId}`)
@@ -26,13 +32,4 @@ module.exports = {
     updateExpenseController,
     deleteExpenseController
 }
-=======
-const getExpenseController = async (req, res, next) => {
-  const projectId = req.params.projectId;
 
-  let projectExpenses;
-  try {
-    // projectExpenses = await
-  } catch (error) {}
-};
->>>>>>> adf56ee654a15af4e8d999634d9b11bd436e5c51
