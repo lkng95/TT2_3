@@ -17,13 +17,11 @@ const routes = require("./api/route/index");
 // var user = auth.currentUser();
 // if(user) {
 
-
 // } else {
 
 // }
 
 app.use("/manage", routes);
-
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}`);
