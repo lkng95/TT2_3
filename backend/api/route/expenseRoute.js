@@ -21,10 +21,12 @@ router.put("/:projectId/update-expenses", async(req, res) => {
     description = String(description)
     amount = Number(amount)
     updated_by = String(updated_by)
-    
+
     console.log(`update expenses`);
     updateExpenseController(projectId, category_id, name, description, amount, updated_by, updated_at).then(data => res.json(data));
     
 });
+
+
 
 module.exports = router;
