@@ -10,7 +10,7 @@ const getExpenseController = async (req, res, next) => {
 
   let projectExpenses;
   try {
-    projectExpenses = await project.find({ project_id: projectId });
+    projectExpenses = await expense.find({ project_id: projectId });
   } catch (error) {
     return next(error);
   }
@@ -25,10 +25,11 @@ const getExpenseController = async (req, res, next) => {
 const addExpenseController = async (req, res, next) => {
   //   const projectId = req.params.projectId;
   const body = req.body;
+  const user = req.body.created_by; // body assumed to have created_by field
 
   let addedExpense;
   try {
-    const newExpense = new expense({ ...body });
+    const newExpense = new expense({ ...body, updated_by: user });
     addedExpense = await newExpense.save().toObject();
   } catch (error) {
     return next(error);
