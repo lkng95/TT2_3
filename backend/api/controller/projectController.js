@@ -12,10 +12,10 @@ class projectControler {
     async getAllProjects() {
         apiLogger.info(`project controller: getAllProjects`)
     
-        const user = await User.findOne({id: 1});
+        
 
         
-        const projects = await Project.find({user_id: 1});
+        const projects = await Project.find();
         console.log(projects)
 
         return projects
@@ -23,7 +23,15 @@ class projectControler {
         
     }
     
+    async getProject(projectid) {
 
+        // const user = await User.findOne({id: 1});
+        console.log(projectid)
+        const projects = await Project.find({id: projectid});
+        console.log(projects)
+
+        return projects
+    }
 
 }
 
