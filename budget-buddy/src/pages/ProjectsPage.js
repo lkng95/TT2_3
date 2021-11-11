@@ -33,6 +33,12 @@ const ProjectsPage = () => {
   // 	}
   // ]
 
+  const findProject = (name) => {
+    return projects.find((project) => {
+      return (project.name = name);
+    });
+  };
+
   const [projects, setProjects] = useState([
     {
       id: 1,
@@ -88,7 +94,7 @@ const ProjectsPage = () => {
         Header: "Project",
         accessor: "description",
         Cell: (e) => (
-          <Link to="/projectInfo" params={e.id}>
+          <Link to="/projectInfo" params={e.value}>
             {e.value}
           </Link>
         ),
