@@ -5,7 +5,6 @@ const {
   addExpenseController,
   updateExpenseController
 } = require("../controllers/expenseController");
-const { route } = require("../..");
 
 const router = express.Router();
 

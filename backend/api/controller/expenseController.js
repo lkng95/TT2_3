@@ -30,6 +30,7 @@ async function deleteExpenseController(projectId) {
 
 module.exports = {
     updateExpenseController,
-    deleteExpenseController
+    deleteExpenseController,
+    getExpenseController
 }
 

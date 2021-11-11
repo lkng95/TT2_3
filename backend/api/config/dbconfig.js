@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const logger = require("../logger/api.logger");
 
-const MONGO_CONNECTION_STRING = require("./keys.js").mongoURI;
+// const MONGO_CONNECTION_STRING = require("./keys.js").mongoURI;
+const MONGO_CONNECTION_STRING = "mongodb+srv://dbsuser:dbs123@cluster0.u7kfp.mongodb.net/data?retryWrites=true&w=majority"
 const connect = () => {
-  const url = process.env.MONGO_CONNECTION_STRING;
+  const url = MONGO_CONNECTION_STRING;
   logger.info(
     "process.env.MONGO_CONNECTION_STRING :::" +
-      process.env.MONGO_CONNECTION_STRING
+      MONGO_CONNECTION_STRING
   );
 
   mongoose.connect(url, {
@@ -34,3 +35,8 @@ const disconnect = () => {
     console.log("Diconnected  to database");
   });
 };
+
+module.exports = {
+    connect,
+    disconnect
+}
