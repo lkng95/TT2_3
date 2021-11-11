@@ -16,11 +16,11 @@ const projectSchema = mongoose.Schema({
   description: {
     type: String,
     required: true,
-  }
+  },
 });
 
-const Project = mongoose.model('Model', projectSchema, 'project');
+const Project = mongoose.model("Model", projectSchema, "project");
 
 module.exports = {
-  Project
+  Project,
 };
