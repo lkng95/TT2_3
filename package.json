@@ -28,7 +28,8 @@
     "mongod": "^2.0.0",
     "mongodb": "^4.1.4",
     "mongoose": "^6.0.12",
-    "pine": "^1.1.1"
+    "pine": "^1.1.1",
+    "react-table": "^7.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
