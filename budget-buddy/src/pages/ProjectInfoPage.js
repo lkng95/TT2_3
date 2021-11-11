@@ -1,9 +1,9 @@
 import React from "react";
-import "./Project.css";
+import "../css/Project.css";
 import { useTable } from "react-table";
 import axios from "axios";
 
-function Project({ id, uid, name, budget, description }) {
+function ProjectInfoPage({ id, uid, name, budget, description }) {
   const GET_API_PROJ = "http://localhost:3001/manage/projects/all";
   const GET_API_EXPENSES = "http://localhost:3001/manage/1/view-expenses";
 
@@ -53,7 +53,7 @@ function Project({ id, uid, name, budget, description }) {
   } = useTable({ columns, data });
 
   return (
-    <div className="project">
+    <div className="container">
       {/* Project ID, Name, Description, Budget */}
       <div className="project__info">
         <p>Project #{id}</p>
@@ -132,4 +132,4 @@ function Project({ id, uid, name, budget, description }) {
   );
 }
 
-export default Project;
+export default ProjectInfoPage;

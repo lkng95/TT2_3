@@ -9,7 +9,53 @@ import firebase from "../firebase";
 const ProjectsPage = () => {
   const auth = firebase.auth();
 
-  const [projects, setProjects] = useState([]);
+  //   [
+  // 	{
+  // 			"id": 1,
+  // 			"user_id": 4,
+  // 			"name": "RTF",
+  // 			"budget": 12000,
+  // 			"description": "Realtime Face Recogniton"
+  // 	},
+  // 	{
+  // 			"id": 2,
+  // 			"user_id": 1,
+  // 			"name": "SWT",
+  // 			"budget": 80000,
+  // 			"description": "Smart Watch Tracker"
+  // 	},
+  // 	{
+  // 			"id": 3,
+  // 			"user_id": 2,
+  // 			"name": "ULS",
+  // 			"budget": 11000,
+  // 			"description": "Upgrade Legacy System"
+  // 	}
+  // ]
+
+  const [projects, setProjects] = useState([
+    {
+      id: 1,
+      user_id: 4,
+      name: "RTF",
+      budget: 12000,
+      description: "Realtime Face Recogniton",
+    },
+    {
+      id: 2,
+      user_id: 1,
+      name: "SWT",
+      budget: 80000,
+      description: "Smart Watch Tracker",
+    },
+    {
+      id: 3,
+      user_id: 2,
+      name: "ULS",
+      budget: 11000,
+      description: "Upgrade Legacy System",
+    },
+  ]);
   const [isLoading, setIsLoading] = useState(false);
 
   const PROJECT_API = axios.create({ baseURL: "http://localhost:3001/manage" });
@@ -41,7 +87,11 @@ const ProjectsPage = () => {
       {
         Header: "Project",
         accessor: "description",
-        Cell: (e) => <Link to="/projects/1">{e.value}</Link>,
+        Cell: (e) => (
+          <Link to="/projectInfo" params={e.id}>
+            {e.value}
+          </Link>
+        ),
         // Cell: e =><a href={e.value}> {e.value} </a>
       },
       {
@@ -139,6 +189,7 @@ const ProjectsPage = () => {
                       );
                     })
                   }
+                  <Button color="red" text="X" />
                 </tr>
               );
             })
