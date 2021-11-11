@@ -51,12 +51,9 @@ function Project({ id, uid, name, budget, description }) {
       {/* Project ID, Name, Description, Budget */}
       <div className="project__info">
         <p>Project #{id}</p>
-        <p>{name}</p>
-        <p>{description}</p>
-        <p className="project__budget">
-          <small>Project Budget: </small>
-          <strong>{budget}</strong>
-        </p>
+        <p>Name: {name}</p>
+        <p>Description: {description}</p>
+        <p className="project__budget">Project Budget: ${budget}</p>
         <p>Total Expenses used so far: </p>
         <p>Remaining: </p>
       </div>
