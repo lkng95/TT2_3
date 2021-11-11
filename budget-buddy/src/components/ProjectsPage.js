@@ -35,7 +35,7 @@ const ProjectsPage = () => {
 	// useEffect(() => {
 	// 	const getProjects = async () => {
 	// 		try {
-	// 			const res = await PROJECT_API.get('/projects')
+	// 			const res = await PROJECT_API.get('/projects/all')
   //       setProjects(res.data)
 	// 		} catch (err) {
 	// 			console.log(`Error: ${err.message}`)
