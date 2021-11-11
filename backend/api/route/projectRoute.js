@@ -1,12 +1,10 @@
-
-const logger = require('pine/lib/logger');
+const logger = require("pine/lib/logger");
 const express = require("express");
-const projectControler = require('../controllers/projectController')
+const projectControler = require("../controllers/projectController");
 
 const router = express.Router();
 
-router.get("/projects", async(req, res) => {
-    console.log(`get projects`);
-    projectControler.getAccounts().then(data => res.json(data));
-    
+router.get("/all", async (req, res) => {
+  console.log(`get projects`);
+  projectControler.getAccounts().then((data) => res.json(data));
 });
