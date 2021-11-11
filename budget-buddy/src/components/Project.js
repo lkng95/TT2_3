@@ -1,8 +1,12 @@
 import React from "react";
 import "./Project.css";
 import { useTable } from "react-table";
+import axios from "axios";
 
 function Project({ id, uid, name, budget, description }) {
+  const GET_API_PROJ = "http://localhost:3001/manage/projects/all";
+  const GET_API_EXPENSES = "http://localhost:3001/manage/1/view-expenses";
+
   const [post, setPost] = React.useState(null);
 
   const data = React.useMemo(
