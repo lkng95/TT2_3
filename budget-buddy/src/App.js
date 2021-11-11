@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import ProjectsPage from "./pages/ProjectsPage";
 import ViewExpenses from "./components/ViewExpenses";
 import AddExpense from "./components/AddExpense";
 import AddProject from "./components/AddProject";
