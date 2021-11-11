@@ -9,53 +9,30 @@ import firebase from "../firebase";
 const ProjectsPage = () => {
   const auth = firebase.auth();
 
-  //   [
-  // 	{
-  // 			"id": 1,
-  // 			"user_id": 4,
-  // 			"name": "RTF",
-  // 			"budget": 12000,
-  // 			"description": "Realtime Face Recogniton"
-  // 	},
-  // 	{
-  // 			"id": 2,
-  // 			"user_id": 1,
-  // 			"name": "SWT",
-  // 			"budget": 80000,
-  // 			"description": "Smart Watch Tracker"
-  // 	},
-  // 	{
-  // 			"id": 3,
-  // 			"user_id": 2,
-  // 			"name": "ULS",
-  // 			"budget": 11000,
-  // 			"description": "Upgrade Legacy System"
-  // 	}
-  // ]
-
-  const [projects, setProjects] = useState([
-    {
-      id: 1,
-      user_id: 4,
-      name: "RTF",
-      budget: 12000,
-      description: "Realtime Face Recogniton",
-    },
-    {
-      id: 2,
-      user_id: 1,
-      name: "SWT",
-      budget: 80000,
-      description: "Smart Watch Tracker",
-    },
-    {
-      id: 3,
-      user_id: 2,
-      name: "ULS",
-      budget: 11000,
-      description: "Upgrade Legacy System",
-    },
-  ]);
+  // const [projects, setProjects] = useState([
+  //   {
+  //     id: 1,
+  //     user_id: 4,
+  //     name: "RTF",
+  //     budget: 12000,
+  //     description: "Realtime Face Recogniton",
+  //   },
+  //   {
+  //     id: 2,
+  //     user_id: 1,
+  //     name: "SWT",
+  //     budget: 80000,
+  //     description: "Smart Watch Tracker",
+  //   },
+  //   {
+  //     id: 3,
+  //     user_id: 2,
+  //     name: "ULS",
+  //     budget: 11000,
+  //     description: "Upgrade Legacy System",
+  //   },
+  // ]);
+	const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const PROJECT_API = axios.create({ baseURL: "http://localhost:3001/manage" });
@@ -79,7 +56,7 @@ const ProjectsPage = () => {
   let navigate = useNavigate();
 
   // Get data
-  const data = useMemo(() => projects, []);
+  const data = useMemo(() => projects, [projects]);
 
   // Define columns
   const columns = useMemo(
@@ -128,6 +105,7 @@ const ProjectsPage = () => {
   return (
     <div className="container">
       <div className="header">
+				
         <h1>Projects</h1>
         <div>
           <Button
@@ -141,7 +119,10 @@ const ProjectsPage = () => {
         </div>
       </div>
 
-      <table {...getTableProps()}>
+			{isLoading ? (
+					<h4>Loading...</h4>
+				) : (
+					<table {...getTableProps()}>
         <thead>
           {
             // Loop over the header rows
@@ -173,7 +154,7 @@ const ProjectsPage = () => {
               prepareRow(row);
               return (
                 // Apply the row props
-                <tr {...row.getRowProps()}>
+                <tr {...row.getRowProps()} >
                   {
                     // Loop over the rows cells
                     row.cells.map((cell) => {
@@ -196,6 +177,8 @@ const ProjectsPage = () => {
           }
         </tbody>
       </table>
+		)}
+      
     </div>
   );
 };
