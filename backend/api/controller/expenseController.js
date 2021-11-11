@@ -55,10 +55,10 @@ async function updateExpenseController(
   await expense.updateOne({ project_id: projectId }, { $set: { test: test } });
 }
 
-async function deleteExpenseController(projectId) {
-  apiLogger.info(`expense controller::: delete expenses ${projectId}`);
+async function deleteExpenseController(expenseId) {
+  apiLogger.info(`expense controller::: delete expenses ${expenseId}`);
 
-  await expense.deleteOne({ project_id: projectId });
+  await expense.deleteOne({ id: expenseId });
 }
 
 module.exports = {
