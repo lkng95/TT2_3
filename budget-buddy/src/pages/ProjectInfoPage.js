@@ -98,8 +98,9 @@ function ProjectInfoPage({ id }) {
       </div>
       {/* Project ID, Name, Description, Budget */}
       <div className="project__info">
-        <p>Name: {name}</p>
-        <p>Description: {description}</p>
+        <p>Project #{projectID}</p>
+        <p>Name: {projectName}</p>
+        <p>Description: {projectDesc}</p>
         <p className="project__budget">Project Budget: ${budget}</p>
         <p>Total Expenses used so far: </p>
         <p>Remaining: </p>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
 function AddExpense() {
@@ -6,11 +7,25 @@ function AddExpense() {
   const [newExpenseDesc, setNewExpenseDesc] = useState("");
   const [newAmt, setNewAmt] = useState("");
 
+  let navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("/project_info");
+  };
+
+  const addExpense = () => {
+    console.log("Added expense");
+    navigate("/project_info");
+  };
+
   return (
     <div className="container">
       <div className="header">
         <h1>Add new expense:</h1>
-        <Button color="green" text="Add" />
+        <div>
+          <Button color="red" text="Back" onClick={goBack} />
+          <Button color="green" text="Add" onClick={addExpense} />
+        </div>
       </div>
       <form className="add-form">
         <div className="form-control">
