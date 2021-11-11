@@ -2,6 +2,8 @@ const Project = require("../model/projectModel");
 const Expense = require("../model/expenseModel");
 const { errorFormatter } = require("../utils/errorFormatter");
 const { OK } = require("http-status");
+const apiLogger = require("../logger/api.logger");
+const { connect, disconnect } = require("../config/dbconfig");
 
 const getExpenseController = async (req, res, next) => {
   const projectId = req.params.projectId;
@@ -20,4 +22,28 @@ const getExpenseController = async (req, res, next) => {
   return res.status(OK).json({ result: projectExpenses });
 };
 
-module.exports = { getExpenseController };
+async function updateExpenseController(
+  projectId,
+  category_id,
+  name,
+  description,
+  amount,
+  updated_by,
+  updated_at
+) {
+  apiLogger.info(`expense controller::: update expenses ${projectId}`);
+
+  await expense.updateOne({ project_id: projectId }, { $set: { test: test } });
+}
+
+async function deleteExpenseController(projectId) {
+  apiLogger.info(`expense controller::: delete expenses ${projectId}`);
+
+  await expense.deleteOne({ project_id: projectId });
+}
+
+module.exports = {
+  getExpenseController,
+  updateExpenseController,
+  deleteExpenseController,
+};
