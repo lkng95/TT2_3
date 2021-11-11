@@ -3,46 +3,54 @@ import { useTable } from 'react-table';
 import axios from 'axios';
 import { NavLink as Link } from "react-router-dom";
 
+// const PROJECT_API = axios.create({ baseURL: 'http://localhost:3001/manage'});
 
-// const PROJECT_API = "http://localhost:3001/manage";
+// [
+// 	{
+// 			"id": 1,
+// 			"user_id": 4,
+// 			"name": "RTF",
+// 			"budget": 12000,
+// 			"description": "Realtime Face Recogniton"
+// 	},
+// 	{
+// 			"id": 2,
+// 			"user_id": 1,
+// 			"name": "SWT",
+// 			"budget": 80000,
+// 			"description": "Smart Watch Tracker"
+// 	},
+// 	{
+// 			"id": 3,
+// 			"user_id": 2,
+// 			"name": "ULS",
+// 			"budget": 11000,
+// 			"description": "Upgrade Legacy System"
+// 	}
+// ]
 
 
 const ProjectsPage = () => {
-	const [projects, setProjects] = useState([
-		{
-			"id": 1,
-			"user_id": 4,
-			"name": "RTF",
-			"budget": 12000,
-			"description": "Realtime Face Recogniton"
-		},
-		{
-				"id": 2,
-				"user_id": 1,
-				"name": "SWT",
-				"budget": 80000,
-				"description": "Smart Watch Tracker"
-		},
-		{
-				"id": 3,
-				"user_id": 2,
-				"name": "ULS",
-				"budget": 11000,
-				"description": "Upgrade Legacy System"
-		}
-	]);
+	const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-	// useEffect(() => {
-	// 	const getProjects = async () => {
-	// 		try {
-	// 			const res = await PROJECT_API.get('/projects/all')
-  //       setProjects(res.data)
-	// 		} catch (err) {
-	// 			console.log(`Error: ${err.message}`)
-	// 		}
-	// 	} 
+  const PROJECT_API = axios.create({ baseURL: 'http://localhost:3001/manage'});
 
-	// }, [])
+	useEffect(() => {
+    const getProjects = async () => {
+			setIsLoading(true);
+      try {
+        const res = await PROJECT_API.get('/projects/all');
+        setProjects(res.data);
+        setIsLoading(false);
+        console.log(res.data);
+      } catch (err) {
+        console.log(`Error: ${err.message}`)
+      }
+    } 
+
+		getProjects();
+	}, []);
 
 	// Get data
 	const data = useMemo(
@@ -82,50 +90,53 @@ const ProjectsPage = () => {
 		<div>
 			<h1>Projects</h1>
 
-			<table {...getTableProps()}>
-				<thead>
-					{// Loop over the header rows
-					headerGroups.map(headerGroup => (
-						// Apply the header row props
-						<tr {...headerGroup.getHeaderGroupProps()}>
-							{// Loop over the headers in each row
-							headerGroup.headers.map(column => (
-								// Apply the header cell props
-								<th {...column.getHeaderProps()}>
-									{// Render the header
-									column.render('Header')}
-								</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				{/* Apply the table body props */}
-				<tbody {...getTableBodyProps()}>
-					{// Loop over the table rows
-					rows.map(row => {
-						// Prepare the row for display
-						prepareRow(row)
-						return (
-							// Apply the row props
-							<tr {...row.getRowProps()}>
-								{// Loop over the rows cells
-								row.cells.map(cell => {
-									console.log(cell)
-									// Apply the cell props
-									return (
-										<td {...cell.getCellProps()}>
-											{// Render the cell contents
-											cell.render("Cell")
-										}
-										</td>
-									)
-								})}
+			{isLoading ? (
+				<h4>Loading...</h4>
+			) : (
+				<table {...getTableProps()}>
+					<thead>
+						{// Loop over the header rows
+						headerGroups.map(headerGroup => (
+							// Apply the header row props
+							<tr {...headerGroup.getHeaderGroupProps()}>
+								{// Loop over the headers in each row
+								headerGroup.headers.map(column => (
+									// Apply the header cell props
+									<th {...column.getHeaderProps()}>
+										{// Render the header
+										column.render('Header')}
+									</th>
+								))}
 							</tr>
-						)
-					})}
-				</tbody>
-			</table>
-			
+						))}
+					</thead>
+					{/* Apply the table body props */}
+					<tbody {...getTableBodyProps()}>
+						{// Loop over the table rows
+						rows.map(row => {
+							// Prepare the row for display
+							prepareRow(row)
+							return (
+								// Apply the row props
+								<tr {...row.getRowProps()}>
+									{// Loop over the rows cells
+									row.cells.map(cell => {
+										console.log(cell)
+										// Apply the cell props
+										return (
+											<td {...cell.getCellProps()}>
+												{// Render the cell contents
+												cell.render("Cell")
+											}
+											</td>
+										)
+									})}
+								</tr>
+							)
+						})}
+					</tbody>
+				</table>
+			)}
 		</div>
 	)
 }
