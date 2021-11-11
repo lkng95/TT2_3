@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const expenseSchema = mongoose.Schema(
   {
+    id: {
+      type: Number,
+      required: true
+    },
     project_id: {
       type: Number,
       required: true,

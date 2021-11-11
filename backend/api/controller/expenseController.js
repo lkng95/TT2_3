@@ -59,10 +59,22 @@ async function updateExpenseController(
   await expense.updateOne({ project_id: projectId }, { $set: { test: test } });
 }
 
-async function deleteExpenseController(expenseId) {
-  apiLogger.info(`expense controller::: delete expenses ${expenseId}`);
+async function deleteExpenseController(projectId, expenseId) {
+  apiLogger.info(`expense controller::: delete expenses ${expenseId} , ${projectId}`);
 
-  await expense.deleteOne({ id: expenseId });
+  // await expense.deleteOne({ id: expenseId });
+  
+  let response = await expense.deleteOne({ 
+    id: expenseId,
+    project_id: projectId
+   });
+  console.log(response)
+
+  if(!response) {
+    return { message: "No expenses found" }
+  } else {
+    return response
+  }
 }
 
 module.exports = {
