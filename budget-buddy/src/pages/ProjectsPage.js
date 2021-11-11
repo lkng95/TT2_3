@@ -81,6 +81,12 @@ const ProjectsPage = () => {
   // Get data
   const data = useMemo(() => projects, []);
 
+  const findProject = (name) => {
+    return projects.find((project) => {
+      return (project.name = name);
+    });
+  };
+
   // Define columns
   const columns = useMemo(
     () => [
@@ -88,7 +94,7 @@ const ProjectsPage = () => {
         Header: "Project",
         accessor: "description",
         Cell: (e) => (
-          <Link to="/projectInfo" params={e.id}>
+          <Link to="/project_info" params={findProject(e.value)}>
             {e.value}
           </Link>
         ),
