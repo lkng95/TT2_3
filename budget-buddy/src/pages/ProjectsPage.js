@@ -9,6 +9,29 @@ import firebase from "../firebase";
 const ProjectsPage = () => {
   const auth = firebase.auth();
 
+  // const [projects, setProjects] = useState([
+  //   {
+  //     id: 1,
+  //     user_id: 4,
+  //     name: "RTF",
+  //     budget: 12000,
+  //     description: "Realtime Face Recogniton",
+  //   },
+  //   {
+  //     id: 2,
+  //     user_id: 1,
+  //     name: "SWT",
+  //     budget: 80000,
+  //     description: "Smart Watch Tracker",
+  //   },
+  //   {
+  //     id: 3,
+  //     user_id: 2,
+  //     name: "ULS",
+  //     budget: 11000,
+  //     description: "Upgrade Legacy System",
+  //   },
+  // ]);
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +56,7 @@ const ProjectsPage = () => {
   let navigate = useNavigate();
 
   // Get data
-  const data = useMemo(() => projects, []);
+  const data = useMemo(() => projects, [projects]);
 
   // Define columns
   const columns = useMemo(
@@ -41,7 +64,11 @@ const ProjectsPage = () => {
       {
         Header: "Project",
         accessor: "description",
-        Cell: (e) => <Link to="/projects/1">{e.value}</Link>,
+        Cell: (e) => (
+          <Link to="/project_info" params={e.value}>
+            {e.value}
+          </Link>
+        ),
         // Cell: e =><a href={e.value}> {e.value} </a>
       },
       {
@@ -91,60 +118,65 @@ const ProjectsPage = () => {
         </div>
       </div>
 
-      <table {...getTableProps()}>
-        <thead>
-          {
-            // Loop over the header rows
-            headerGroups.map((headerGroup) => (
-              // Apply the header row props
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {
-                  // Loop over the headers in each row
-                  headerGroup.headers.map((column) => (
-                    // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
-                      {
-                        // Render the header
-                        column.render("Header")
-                      }
-                    </th>
-                  ))
-                }
-              </tr>
-            ))
-          }
-        </thead>
-        {/* Apply the table body props */}
-        <tbody {...getTableBodyProps()}>
-          {
-            // Loop over the table rows
-            rows.map((row) => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
+      {isLoading ? (
+        <h4>Loading...</h4>
+      ) : (
+        <table {...getTableProps()}>
+          <thead>
+            {
+              // Loop over the header rows
+              headerGroups.map((headerGroup) => (
+                // Apply the header row props
+                <tr {...headerGroup.getHeaderGroupProps()}>
                   {
-                    // Loop over the rows cells
-                    row.cells.map((cell) => {
-                      console.log(cell);
-                      // Apply the cell props
-                      return (
-                        <td {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render("Cell")
-                          }
-                        </td>
-                      );
-                    })
+                    // Loop over the headers in each row
+                    headerGroup.headers.map((column) => (
+                      // Apply the header cell props
+                      <th {...column.getHeaderProps()}>
+                        {
+                          // Render the header
+                          column.render("Header")
+                        }
+                      </th>
+                    ))
                   }
                 </tr>
-              );
-            })
-          }
-        </tbody>
-      </table>
+              ))
+            }
+          </thead>
+          {/* Apply the table body props */}
+          <tbody {...getTableBodyProps()}>
+            {
+              // Loop over the table rows
+              rows.map((row) => {
+                // Prepare the row for display
+                prepareRow(row);
+                return (
+                  // Apply the row props
+                  <tr {...row.getRowProps()}>
+                    {
+                      // Loop over the rows cells
+                      row.cells.map((cell) => {
+                        console.log(cell);
+                        // Apply the cell props
+                        return (
+                          <td {...cell.getCellProps()}>
+                            {
+                              // Render the cell contents
+                              cell.render("Cell")
+                            }
+                          </td>
+                        );
+                      })
+                    }
+                    <Button color="red" text="X" />
+                  </tr>
+                );
+              })
+            }
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
