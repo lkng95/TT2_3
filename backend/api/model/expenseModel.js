@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const expenseModel = mongoose.Schema(
+const expenseSchema = mongoose.Schema(
   {
     project_id: {
       type: Number,
@@ -22,8 +22,16 @@ const expenseModel = mongoose.Schema(
       type: Number,
       required: true,
     },
+    created_by: {
+      type: String,
+      required: true,
+    },
+    updated_by: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Expense", expenseModel);
+module.exports = mongoose.model("Expense", expenseSchema);
